@@ -23,6 +23,8 @@ ROBOT_XML_DICT = {
     "tienkung": ASSET_ROOT / "tienkung" / "mjcf" / "tienkung.xml",
     "pal_talos": ASSET_ROOT / "pal_talos" / "talos.xml",
     "fourier_gr3": ASSET_ROOT / "fourier_gr3v2_1_1" / "mjcf" / "gr3v2_1_1_dummy_hand.xml",
+    "kapex": ASSET_ROOT / "kapex" / "KAPEX0_mockup_wo_hand.xml",
+    "unitree_go2": ASSET_ROOT / "unitree_go2" / "go2_mocap.xml",  # quadruped: human arms -> front legs
 }
 
 IK_CONFIG_DICT = {
@@ -45,6 +47,8 @@ IK_CONFIG_DICT = {
         "pnd_adam_lite": IK_CONFIG_ROOT / "smplx_to_adam.json",
         "tienkung": IK_CONFIG_ROOT / "smplx_to_tienkung.json",
         "fourier_gr3": IK_CONFIG_ROOT / "smplx_to_gr3.json",
+        "kapex": IK_CONFIG_ROOT / "smplx_to_kapex.json",
+        "unitree_go2": IK_CONFIG_ROOT / "smplx_to_go2.json",
     },
     "bvh_lafan1":{
         "unitree_g1": IK_CONFIG_ROOT / "bvh_lafan1_to_g1.json",
@@ -54,6 +58,8 @@ IK_CONFIG_DICT = {
         "stanford_toddy": IK_CONFIG_ROOT / "bvh_lafan1_to_toddy.json",
         "engineai_pm01": IK_CONFIG_ROOT / "bvh_lafan1_to_pm01.json",
         "pal_talos": IK_CONFIG_ROOT / "bvh_to_talos.json",
+        "kapex": IK_CONFIG_ROOT / "bvh_lafan1_to_kapex.json",
+        "unitree_go2": IK_CONFIG_ROOT / "bvh_lafan1_to_go2.json",
     },
     "bvh_nokov":{
         "unitree_g1": IK_CONFIG_ROOT / "bvh_nokov_to_g1.json",
@@ -98,6 +104,8 @@ ROBOT_BASE_DICT = {
     "tienkung": "Base_link",
     "pal_talos": "base_link",
     "fourier_gr3": "base_link",
+    "kapex": "pelvis",
+    "unitree_go2": "base_link",
 }
 
 VIEWER_CAM_DISTANCE_DICT = {
@@ -119,4 +127,6 @@ VIEWER_CAM_DISTANCE_DICT = {
     "tienkung": 3.0,
     "pal_talos": 3.0,
     "fourier_gr3": 2.0,
+    "kapex": 2.5,
+    "unitree_go2": 1.5,
 }

@@ -51,8 +51,9 @@ class RobotMotionViewer:
                 # video recording
                 record_video=False,
                 video_path=None,
-                video_width=640,
-                video_height=480,
+                video_width=1280,
+                video_height=720,
+                video_crf=18,
                 keyboard_callback=None,
                 ):
         
@@ -87,9 +88,22 @@ class RobotMotionViewer:
             
             if not os.path.exists(video_dir):
                 os.makedirs(video_dir)
-            self.mp4_writer = imageio.get_writer(self.video_path, fps=self.motion_fps)
-            print(f"Recording video to {self.video_path}")
-            
+            # High-quality H.264 encoding: CRF controls quality (lower = better,
+            # 18 is visually near-lossless), slow preset improves compression.
+            self.mp4_writer = imageio.get_writer(
+                self.video_path,
+                fps=self.motion_fps,
+                codec="libx264",
+                quality=None,        # disable qscale so -crf takes effect
+                pixelformat="yuv420p",
+                output_params=["-crf", str(video_crf), "-preset", "slow"],
+            )
+            print(f"Recording video to {self.video_path} ({video_width}x{video_height}, crf={video_crf})")
+
+            # MuJoCo's offscreen framebuffer defaults to 640x480; grow it so the
+            # renderer can produce higher-resolution frames without erroring.
+            self.model.vis.global_.offwidth = max(self.model.vis.global_.offwidth, video_width)
+            self.model.vis.global_.offheight = max(self.model.vis.global_.offheight, video_height)
             # Initialize renderer for video recording
             self.renderer = mj.Renderer(self.model, height=video_height, width=video_width)
         
